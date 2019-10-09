@@ -1,0 +1,42 @@
+{
+    "name": "eleventy-plugin-sass",
+    "version": "1.0.0",
+    "description": "A plugin for sass support in Eleventy",
+    "main": "index.js",
+    "scripts": {
+        "serve": "npx @11ty/eleventy --serve"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Sonaryr/eleventy-plugin-sass.git"
+    },
+    "keywords": [
+        "eleventy",
+        "eleventy-plugin",
+        "sass",
+        "scss"
+    ],
+    "author": {
+        "name": "Maarten Schroeven",
+        "email": "maarten@sonaryr.be"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Sonaryr/eleventy-plugin-sass/issues"
+    },
+    "homepage": "https://github.com/Sonaryr/eleventy-plugin-sass",
+    "peerDependencies": {
+        "@11ty/eleventy": "^0.9.0"
+    },
+    "dependencies": {
+        "chalk": "^2.4.2",
+        "chokidar": "^3.2.1",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-clean-css": "^4.2.0",
+        "gulp-if": "^3.0.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-sourcemaps": "^2.6.5",
+        "lodash.debounce": "^4.0.8",
+        "vinyl-fs": "^3.0.3"
+    }
+}
