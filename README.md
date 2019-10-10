@@ -4,7 +4,7 @@ A plugin that adds sass support to [Eleventy](https://github.com/11ty/eleventy)
 
 ## Installation
 
-Available on [npm](https://www.npmjs.com/package/@11ty/eleventy-plugin-sass).
+Available on [npm](https://www.npmjs.com/package/eleventy-plugin-sass).
 
 ```
 npm install eleventy-plugin-sass --save
