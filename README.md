@@ -35,6 +35,10 @@ Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 
 This plugins wraps around internal Eleventy code, so if they changes their way of working it might stop working.
 
+## Contributing
+
+Please do contribute, I am open to any changes. Just clone the repository and open a pull request.
+
 ## License
 
 MIT © [Maarten Schroeven](maarten@sonaryr.be)
