@@ -10,24 +10,6 @@ const _debounce = require('lodash.debounce');
 
 const PLUGIN_NAME = 'Eleventy-Plugin-SASS';
 
-const defaultOptions = {
-    watch: ['**/*.{scss,sass}', '!node_modules/**'],
-    sourcemaps: false,
-    cleanCSS: true,
-    cleanCSSOptions: {},
-    autoprefixer: true
-};
-
-function monkeypatch(cls, fn) {
-    const orig = cls.prototype[fn.name].__original || cls.prototype[fn.name];
-    function wrapped() {
-        return fn.bind(this, orig).apply(this, arguments);
-    }
-    wrapped.__original = orig;
-
-    cls.prototype[fn.name] = wrapped;
-}
-
 const compileSass = _debounce(function(eleventyInstance, options) {
     console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
     vfs.src(options.watch)
@@ -42,6 +24,25 @@ const compileSass = _debounce(function(eleventyInstance, options) {
             eleventyInstance.eleventyServe.reload();
         });
 }, 500);
+
+const defaultOptions = {
+    watch: ['**/*.{scss,sass}', '!node_modules/**'],
+    sourcemaps: false,
+    cleanCSS: true,
+    cleanCSSOptions: {},
+    autoprefixer: true,
+    compileSass
+};
+
+function monkeypatch(cls, fn) {
+    const orig = cls.prototype[fn.name].__original || cls.prototype[fn.name];
+    function wrapped() {
+        return fn.bind(this, orig).apply(this, arguments);
+    }
+    wrapped.__original = orig;
+
+    cls.prototype[fn.name] = wrapped;
+}
 
 function initializeWatcher(eleventyInstance, options) {
     let firstRun = true;
