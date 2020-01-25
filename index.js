@@ -54,10 +54,10 @@ function initializeWatcher(eleventyInstance, options) {
             if (!firstRun) {
             }
             firstRun = false;
-            compileSass(eleventyInstance, options);
+            options.compileSass(eleventyInstance, options);
         })
         .on('change', path => {
-            compileSass(eleventyInstance, options);
+            options.compileSass(eleventyInstance, options);
         });
 }
 
@@ -71,7 +71,7 @@ module.exports = {
             if (Eleventy.prototype) {
                 function write(original) {
                     if (!initialized && !this.isDryRun) {
-                        compileSass(this, options);
+                        options.compileSass(this, options);
                     }
                     return original.apply(this);
                 }
