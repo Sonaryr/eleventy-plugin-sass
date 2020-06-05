@@ -30,10 +30,18 @@ function monkeypatch(cls, fn) {
 
 const compileSass = _debounce(function(eleventyInstance, options) {
     console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
-    vfs.src(options.watch)
+    let mainPipe = vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
         .pipe(sass())
-        .pipe(gulpIf(options.autoprefixer, prefix()))
+        .pipe(gulpIf(options.autoprefixer, prefix()));
+
+    if (Array.isArray(options.additionalSteps)) {
+        options.additionalSteps.forEach(step => {
+            mainPipe = mainPipe.pipe(step);
+        });
+    }
+
+    mainPipe
         .pipe(gulpIf(options.cleanCSS, cleanCSS(options.cleanCSSOptions)))
         .pipe(gulpIf(options.sourcemaps, sourcemaps.write('.')))
         .pipe(vfs.dest(eleventyInstance.outputDir))
