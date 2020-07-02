@@ -37,7 +37,7 @@ function monkeypatch(cls, fn) {
 }
 
 const compileSass = _debounce(function(eleventyInstance, options) {
-    console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files to:`);
+    console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
         .pipe(sass().on('error', sass.logError))
@@ -83,7 +83,13 @@ module.exports = {
                     }
                     return original.apply(this);
                 }
-
+                function watch(original) {
+                    if (!initialized) {
+                        initializeWatcher(this, options);
+                        initialized = true;
+                    }
+                    return original.apply(this);
+                }
                 function serve(original, port) {
                     if (!initialized) {
                         initializeWatcher(this, options);
@@ -92,6 +98,7 @@ module.exports = {
                     return original.apply(this, [port]);
                 }
                 monkeypatch(Eleventy, write);
+                monkeypatch(Eleventy, watch);
                 monkeypatch(Eleventy, serve);
             }
         });
