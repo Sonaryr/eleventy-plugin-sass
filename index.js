@@ -7,6 +7,7 @@ const cleanCSS = require('gulp-clean-css');
 const prefix = require('gulp-autoprefixer');
 const chalk = require('chalk');
 const _debounce = require('lodash.debounce');
+const path = require('path');
 
 const PLUGIN_NAME = 'Eleventy-Plugin-SASS';
 
@@ -15,7 +16,8 @@ const defaultOptions = {
     sourcemaps: false,
     cleanCSS: true,
     cleanCSSOptions: {},
-    autoprefixer: true
+    autoprefixer: true,
+    outputDir: '',
 };
 
 function monkeypatch(cls, fn) {
@@ -36,7 +38,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
         .pipe(gulpIf(options.autoprefixer, prefix()))
         .pipe(gulpIf(options.cleanCSS, cleanCSS(options.cleanCSSOptions)))
         .pipe(gulpIf(options.sourcemaps, sourcemaps.write('.')))
-        .pipe(vfs.dest(eleventyInstance.outputDir))
+        .pipe(vfs.dest(path.join(eleventyInstance.outputDir, options.outputDir)))
         .on('end', function() {
             console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling sass files`);
             eleventyInstance.eleventyServe.reload();
