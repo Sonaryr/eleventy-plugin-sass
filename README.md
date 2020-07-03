@@ -30,6 +30,8 @@ Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 | `cleanCSS`        | Boolean                | `true`                                     | Runs the css trough [cleanCSS](https://github.com/jakubpawlowicz/clean-css)                                       |
 | `cleanCSSOptions` | Object                 | `N/A`                                      | Options to pass to cleanCSS                                                                                       |
 | `autoprefixer`    | Boolean                | `true`                                     | Adds browser specific prefixes if needed (adheres to [BrowserList](https://github.com/browserslist/browserslist)) |
+| `outputDir`       | String                 | undefined                                  | specifies the desired output directory |
+| `remap`           | Boolean                | false                                      | toggles the way EPS handles the output or better omits the path-part of each parsed file, so that you might get a slightly cleaner output |
 
 ## Disclaimer
 
