@@ -23,7 +23,7 @@ const defaultOptions = {
     cleanCSSOptions: {},
     autoprefixer: true,
     outputDir: undefined,
-    remap: true
+    remap: false
 };
 
 function monkeypatch(cls, fn) {
