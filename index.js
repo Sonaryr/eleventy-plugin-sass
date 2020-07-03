@@ -15,7 +15,7 @@ const remap = function(file, cb) {
     cb(null, file);
 };
 const PLUGIN_NAME = 'Eleventy-Plugin-SASS';
-
+const PLUGIN_SHORT = 'PS';
 const defaultOptions = {
     watch: ['**/*.{scss,sass}', '!node_modules/**'],
     sourcemaps: false,
@@ -27,11 +27,11 @@ const defaultOptions = {
 };
 
 function monkeypatch(cls, fn) {
-    const orig = cls.prototype[fn.name].__original || cls.prototype[fn.name];
+    const orig = cls.prototype[fn.name][`_${PLUGIN_SHORT}_original`] || cls.prototype[fn.name];
     function wrapped() {
         return fn.bind(this, orig).apply(this, arguments);
     }
-    wrapped.__original = orig;
+    wrapped[`_${PLUGIN_SHORT}_original`] = orig;
 
     cls.prototype[fn.name] = wrapped;
 }
