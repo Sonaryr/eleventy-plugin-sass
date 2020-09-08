@@ -36,7 +36,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
         .pipe(gulpIf(options.autoprefixer, prefix()))
         .pipe(gulpIf(options.cleanCSS, cleanCSS(options.cleanCSSOptions)))
         .pipe(gulpIf(options.sourcemaps, sourcemaps.write('.')))
-        .pipe(vfs.dest(eleventyInstance.outputDir))
+        .pipe(vfs.dest(options.outputDir || eleventyInstance.outputDir))
         .on('end', function() {
             console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling sass files`);
             eleventyInstance.eleventyServe.reload();

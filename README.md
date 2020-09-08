@@ -30,6 +30,7 @@ Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 | `cleanCSS`        | Boolean                | `true`                                     | Runs the css trough [cleanCSS](https://github.com/jakubpawlowicz/clean-css)                                       |
 | `cleanCSSOptions` | Object                 | `N/A`                                      | Options to pass to cleanCSS                                                                                       |
 | `autoprefixer`    | Boolean                | `true`                                     | Adds browser specific prefixes if needed (adheres to [BrowserList](https://github.com/browserslist/browserslist)) |
+| `outputDir`       | String                 | `eleventyInstance.outputDir`               | Output directory for compiled sass files |
 
 ## Disclaimer
 
