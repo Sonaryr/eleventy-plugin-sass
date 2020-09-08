@@ -10,7 +10,6 @@ const _debounce = require('lodash.debounce');
 const path = require('path');
 const map = require('map-stream');
 const remap = function(file, cb) {
-    // console.log(file.path);
     file.path = path.parse(file.path).base;
     cb(null, file);
 };
