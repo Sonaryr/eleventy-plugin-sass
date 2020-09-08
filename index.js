@@ -7,23 +7,31 @@ const cleanCSS = require('gulp-clean-css');
 const prefix = require('gulp-autoprefixer');
 const chalk = require('chalk');
 const _debounce = require('lodash.debounce');
-
+const path = require('path');
+const map = require('map-stream');
+const remap = function(file, cb) {
+    // console.log(file.path);
+    file.path = path.parse(file.path).base;
+    cb(null, file);
+};
 const PLUGIN_NAME = 'Eleventy-Plugin-SASS';
-
+const PLUGIN_SHORT = 'PS';
 const defaultOptions = {
     watch: ['**/*.{scss,sass}', '!node_modules/**'],
     sourcemaps: false,
     cleanCSS: true,
     cleanCSSOptions: {},
-    autoprefixer: true
+    autoprefixer: true,
+    outputDir: undefined,
+    remap: false
 };
 
 function monkeypatch(cls, fn) {
-    const orig = cls.prototype[fn.name].__original || cls.prototype[fn.name];
+    const orig = cls.prototype[fn.name][`_${PLUGIN_SHORT}_original`] || cls.prototype[fn.name];
     function wrapped() {
         return fn.bind(this, orig).apply(this, arguments);
     }
-    wrapped.__original = orig;
+    wrapped[`_${PLUGIN_SHORT}_original`] = orig;
 
     cls.prototype[fn.name] = wrapped;
 }
@@ -32,11 +40,12 @@ const compileSass = _debounce(function(eleventyInstance, options) {
     console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulpIf(options.autoprefixer, prefix()))
         .pipe(gulpIf(options.cleanCSS, cleanCSS(options.cleanCSSOptions)))
         .pipe(gulpIf(options.sourcemaps, sourcemaps.write('.')))
-        .pipe(vfs.dest(eleventyInstance.outputDir))
+        .pipe(gulpIf(options.remap, map(remap)))
+        .pipe(vfs.dest( (options.outputDir || eleventyInstance.outputDir), {nodir: true} ))
         .on('end', function() {
             console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling sass files`);
             eleventyInstance.eleventyServe.reload();
@@ -74,7 +83,6 @@ module.exports = {
                     }
                     return original.apply(this);
                 }
-
                 function watch(original) {
                     if (!initialized) {
                         initializeWatcher(this, options);
@@ -82,7 +90,6 @@ module.exports = {
                     }
                     return original.apply(this);
                 }
-
                 function serve(original, port) {
                     if (!initialized) {
                         initializeWatcher(this, options);
