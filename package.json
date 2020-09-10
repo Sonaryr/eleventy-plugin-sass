@@ -37,6 +37,7 @@
         "gulp-sass": "^4.0.2",
         "gulp-sourcemaps": "^2.6.5",
         "lodash.debounce": "^4.0.8",
+        "map-stream": "^0.0.7",
         "vinyl-fs": "^3.0.3"
     }
 }
