@@ -36,7 +36,7 @@ function monkeypatch(cls, fn) {
 }
 
 const compileSass = _debounce(function(eleventyInstance, options) {
-    console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
+    console.log(`[${chalk.cyan(PLUGIN_NAME)}] Compiling sass files...`);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
         .pipe(sass().on('error', sass.logError))
@@ -46,7 +46,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
         .pipe(gulpIf(options.remap, map(remap)))
         .pipe(vfs.dest( (options.outputDir || eleventyInstance.outputDir), {nodir: true} ))
         .on('end', function() {
-            console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling sass files`);
+            console.log(`[${chalk.cyan(PLUGIN_NAME)}] Done compiling sass files`);
             eleventyInstance.eleventyServe.reload();
         });
 }, 500);
