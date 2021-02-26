@@ -13,7 +13,7 @@ const remap = function(file, cb) {
     file.path = path.parse(file.path).base;
     cb(null, file);
 };
-const PLUGIN_NAME = 'Eleventy-Plugin-SASS';
+const PLUGIN_NAME = 'Eleventy-Plugin-Sass';
 const PLUGIN_SHORT = 'PS';
 const defaultOptions = {
     watch: ['**/*.{scss,sass}', '!node_modules/**'],
@@ -36,7 +36,7 @@ function monkeypatch(cls, fn) {
 }
 
 const compileSass = _debounce(function(eleventyInstance, options) {
-    console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling sass files...`);
+    console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling Sass files...`);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
         .pipe(sass().on('error', sass.logError))
@@ -46,7 +46,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
         .pipe(gulpIf(options.remap, map(remap)))
         .pipe(vfs.dest( (options.outputDir || eleventyInstance.outputDir), {nodir: true} ))
         .on('end', function() {
-            console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling sass files`);
+            console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling Sass files`);
             eleventyInstance.eleventyServe.reload();
         });
 }, 500);
