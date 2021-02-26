@@ -1,6 +1,6 @@
 # eleventy-plugin-sass
 
-A plugin that adds sass support to [Eleventy](https://github.com/11ty/eleventy)
+A plugin that adds [Sass](https://sass-lang.com/) support to [Eleventy](https://github.com/11ty/eleventy)
 
 ## Installation
 
