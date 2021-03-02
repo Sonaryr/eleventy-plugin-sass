@@ -32,7 +32,7 @@ Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 | `autoprefixer`    | Boolean                | `true`                                     | Adds browser specific prefixes if needed (adheres to [BrowserList](https://github.com/browserslist/browserslist)) |
 | `outputDir`       | String                 | undefined                                  | specifies the desired output directory |
 | `remap`           | Boolean                | false                                      | toggles the way EPS handles the output or better omits the path-part of each parsed file, so that you might get a slightly cleaner output |
-| `sassOptions`     | Object                 | `N/A`                                      | Options you want to pass to [node-sass](https://github.com/sass/node-sass#options} |
+| `sassOptions`     | Object                 | `N/A`                                      | Options you want to pass to [node-sass](https://github.com/sass/node-sass#options) |
 
 ## Disclaimer
 
