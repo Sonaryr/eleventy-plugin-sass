@@ -20,6 +20,7 @@ const defaultOptions = {
     sourcemaps: false,
     cleanCSS: true,
     cleanCSSOptions: {},
+    sassOptions: {},
     autoprefixer: true,
     outputDir: undefined,
     remap: false
@@ -39,7 +40,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
     console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling Sass files...`);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass(options.sassOptions).on('error', sass.logError))
         .pipe(gulpIf(options.autoprefixer, prefix()))
         .pipe(gulpIf(options.cleanCSS, cleanCSS(options.cleanCSSOptions)))
         .pipe(gulpIf(options.sourcemaps, sourcemaps.write('.')))
