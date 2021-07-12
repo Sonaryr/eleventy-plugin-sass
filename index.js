@@ -1,4 +1,4 @@
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const chokidar = require('chokidar');
 const vfs = require('vinyl-fs');
 const sourcemaps = require('gulp-sourcemaps');
