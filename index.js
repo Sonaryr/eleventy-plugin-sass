@@ -1,4 +1,3 @@
-const sass = require('gulp-sass');
 const chokidar = require('chokidar');
 const vfs = require('vinyl-fs');
 const sourcemaps = require('gulp-sourcemaps');
@@ -23,7 +22,8 @@ const defaultOptions = {
     sassOptions: {},
     autoprefixer: true,
     outputDir: undefined,
-    remap: false
+    remap: false,
+    compiler: require('sass'),
 };
 
 function monkeypatch(cls, fn) {
@@ -38,6 +38,7 @@ function monkeypatch(cls, fn) {
 
 const compileSass = _debounce(function(eleventyInstance, options) {
     console.log(`[${chalk.red(PLUGIN_NAME)}] Compiling Sass files...`);
+    const sass = require('gulp-sass')(options.compiler);
     vfs.src(options.watch)
         .pipe(gulpIf(options.sourcemaps, sourcemaps.init()))
         .pipe(sass(options.sassOptions).on('error', sass.logError))
