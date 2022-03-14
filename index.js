@@ -48,7 +48,7 @@ const compileSass = _debounce(function(eleventyInstance, options) {
         .pipe(vfs.dest( (options.outputDir || eleventyInstance.outputDir), {nodir: true} ))
         .on('end', function() {
             console.log(`[${chalk.red(PLUGIN_NAME)}] Done compiling Sass files`);
-            eleventyInstance.eleventyServe.reload();
+            eleventyInstance.eleventyServe.reload('*.css');
         });
 }, 500);
 
