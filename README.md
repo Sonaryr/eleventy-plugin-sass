@@ -23,16 +23,17 @@ Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 
 ## Options
 
-| Key               | Type                   | Default                                    | description                                                                                                       |
-| ----------------- | ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `watch`           | glob or array of globs | `['**/*.{scss,sass}', '!node_modules/**']` | The sass files you wish to compile (and watch when you serve)                                                     |
-| `sourcemaps`      | Boolean                | `false`                                    | Add sourcemaps next to your sass files                                                                            |
-| `cleanCSS`        | Boolean                | `true`                                     | Runs the css trough [cleanCSS](https://github.com/jakubpawlowicz/clean-css)                                       |
-| `cleanCSSOptions` | Object                 | `N/A`                                      | Options to pass to cleanCSS                                                                                       |
-| `autoprefixer`    | Boolean                | `true`                                     | Adds browser specific prefixes if needed (adheres to [BrowserList](https://github.com/browserslist/browserslist)) |
-| `outputDir`       | String                 | undefined                                  | specifies the desired output directory |
+| Key               | Type                   | Default                                    | description                                                                                                                               |
+| ----------------- | ---------------------- |--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `watch`           | glob or array of globs | `['**/*.{scss,sass}', '!node_modules/**']` | The sass files you wish to compile (and watch when you serve)                                                                             |
+| `sourcemaps`      | Boolean                | `false`                                    | Add sourcemaps next to your sass files                                                                                                    |
+| `cleanCSS`        | Boolean                | `true`                                     | Runs the css trough [cleanCSS](https://github.com/jakubpawlowicz/clean-css)                                                               |
+| `cleanCSSOptions` | Object                 | `N/A`                                      | Options to pass to cleanCSS                                                                                                               |
+| `autoprefixer`    | Boolean                | `true`                                     | Adds browser specific prefixes if needed (adheres to [BrowserList](https://github.com/browserslist/browserslist))                         |
+| `outputDir`       | String                 | undefined                                  | specifies the desired output directory                                                                                                    |
 | `remap`           | Boolean                | false                                      | toggles the way EPS handles the output or better omits the path-part of each parsed file, so that you might get a slightly cleaner output |
-| `sassOptions`     | Object                 | `N/A`                                      | Options you want to pass to [node-sass](https://github.com/sass/node-sass#options) |
+| `onError`         | Callback               | `sass.logError`                            | Override the default `gulp-sass` error handler to a custom one.                                                                           |
+| `sassOptions`     | Object                 | `N/A`                                      | Options you want to pass to [node-sass](https://github.com/sass/node-sass#options)                                                        |
 
 ## Disclaimer
 
